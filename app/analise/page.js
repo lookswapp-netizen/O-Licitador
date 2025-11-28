@@ -190,62 +190,46 @@ export default function Home() {
                             </div>
                         </div>
 
-                        {/* Regra 3: Busca de Mercado */}
+                        {/* Regra 3: Produto de Referência */}
                         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-3 md:col-span-2">
                             <div className="flex items-center gap-2 text-green-600 font-semibold">
                                 <ShoppingCart className="w-5 h-5" />
-                                <h2>🛒 Busca de Mercado</h2>
+                                <h2>📦 Produto de Referência de Mercado</h2>
                             </div>
 
-                            {/* 1. QUERY GERADA PELA IA */}
-                            <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded">
-                                <p className="text-sm font-medium text-green-800">Query Semântica Limpa:</p>
-                                <p className="text-sm text-gray-700 mt-1">
-                                    {result.query_semantica_limpa || result.busca_mercado_query || 'Aguardando análise...'}
-                                </p>
-                            </div>
-
-                            {/* 2. CANDIDATOS DE PREÇO */}
-                            <div className="mt-6">
-                                <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                                    Candidatos de Preço Encontrados
-                                </h3>
-
-                                {result.final_candidates && result.final_candidates.length > 0 ? (
-                                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                        {result.final_candidates.map((item, index) => (
-                                            <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                                                <div className="flex justify-between items-start mb-2">
-                                                    <span className="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">
-                                                        {item.source || 'Mercado'}
-                                                    </span>
-                                                    <span className="text-lg font-bold text-green-600">
-                                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.price)}
-                                                    </span>
-                                                </div>
-                                                <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-3 h-10" title={item.title}>
-                                                    {item.title}
-                                                </h4>
-                                                <a
-                                                    href={item.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="block w-full text-center py-2 px-4 bg-gray-50 hover:bg-gray-100 text-gray-700 text-sm font-medium rounded border border-gray-200 transition-colors"
-                                                >
-                                                    Ver Oferta ↗
-                                                </a>
+                            {result.produto_referencia && result.produto_referencia.marca && result.produto_referencia.modelo ? (
+                                <div className="mt-4 p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
+                                    <div className="flex items-start gap-4">
+                                        <div className="flex-shrink-0 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                            <span className="text-white text-2xl">✓</span>
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-bold text-gray-900 mb-2">
+                                                {result.produto_referencia.marca} - {result.produto_referencia.modelo}
+                                            </h3>
+                                            <p className="text-sm text-gray-700 mb-3">
+                                                Este produto atende às especificações técnicas descritas no edital.
+                                            </p>
+                                            <div className="bg-white/70 p-3 rounded border border-green-300">
+                                                <p className="text-xs font-semibold text-green-800 uppercase mb-1">Aviso Legal</p>
+                                                <p className="text-xs text-gray-600">
+                                                    Esta é uma <strong>referência técnica de qualidade</strong> conforme Lei 14.133/21.
+                                                    A licitação aceita <strong>similares ou equivalentes</strong> que atendam às mesmas especificações.
+                                                </p>
                                             </div>
-                                        ))}
+                                        </div>
                                     </div>
-                                ) : (
-                                    <div className="p-6 text-center bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                                        <p className="text-gray-500 text-sm">
-                                            Nenhum candidato de preço encontrado automaticamente para esta descrição.
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
+                                </div>
+                            ) : (
+                                <div className="mt-4 p-6 text-center bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                                    <p className="text-gray-600 text-sm font-medium mb-1">
+                                        Item de Especificação Genérica
+                                    </p>
+                                    <p className="text-gray-500 text-xs">
+                                        Não foi possível identificar uma marca/modelo específico como referência técnica para este item.
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
                         {/* Regra 4: Justificativa */}
