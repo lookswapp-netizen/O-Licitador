@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useCallback } from 'react';
 import { Search, ShieldCheck, ShoppingCart, FileText, Loader2, ExternalLink } from 'lucide-react';
@@ -137,7 +137,7 @@ export default function Home() {
                             onClick={handleReset}
                             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md"
                         >
-                            🔄 Fazer Nova Busca
+                            Fazer Nova Busca
                         </button>
                     </div>
                 )}
@@ -190,11 +190,56 @@ export default function Home() {
                             </div>
                         </div>
 
+                        {/* CATMAT Information Card */}
+                        {result.catmat_data && result.catmat_data.codigo && (
+                            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-sm border-2 border-blue-200 space-y-3 md:col-span-2">
+                                <div className="flex items-center gap-2 text-blue-700 font-bold text-lg mb-4">
+                                    <span className="text-2xl">📋</span>
+                                    <h3>Informações do CATMAT</h3>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="bg-white/70 p-4 rounded-lg border border-blue-200">
+                                        <p className="text-xs font-bold text-blue-600 uppercase mb-1">Código do Item</p>
+                                        <p className="text-lg font-mono font-bold text-gray-900">{result.catmat_data.codigo}</p>
+                                    </div>
+
+                                    {result.catmat_data.nome && (
+                                        <div className="bg-white/70 p-4 rounded-lg border border-blue-200">
+                                            <p className="text-xs font-bold text-blue-600 uppercase mb-1">Nome do Item (PDM)</p>
+                                            <p className="text-sm font-semibold text-gray-900">{result.catmat_data.nome}</p>
+                                        </div>
+                                    )}
+
+                                    {result.catmat_data.classe && (
+                                        <div className="bg-white/70 p-4 rounded-lg border border-blue-200">
+                                            <p className="text-xs font-bold text-blue-600 uppercase mb-1">Nome da Classe</p>
+                                            <p className="text-sm text-gray-900">{result.catmat_data.classe}</p>
+                                        </div>
+                                    )}
+
+                                    {result.catmat_data.grupo && (
+                                        <div className="bg-white/70 p-4 rounded-lg border border-blue-200">
+                                            <p className="text-xs font-bold text-blue-600 uppercase mb-1">Nome do Grupo</p>
+                                            <p className="text-sm text-gray-900">{result.catmat_data.grupo}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {result.catmat_data.descricao && (
+                                    <div className="bg-white/70 p-4 rounded-lg border border-blue-200 mt-2">
+                                        <p className="text-xs font-bold text-blue-600 uppercase mb-2">Descrição Completa do Item</p>
+                                        <p className="text-sm text-gray-900 leading-relaxed">{result.catmat_data.descricao}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {/* Regra 3: Produto de Referência */}
                         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-3 md:col-span-2">
                             <div className="flex items-center gap-2 text-green-600 font-semibold">
                                 <ShoppingCart className="w-5 h-5" />
-                                <h2>📦 Produto de Referência de Mercado</h2>
+                                <h2> Produto de Referência de Mercado</h2>
                             </div>
 
                             {/* Query Semântica Limpa */}
@@ -210,7 +255,7 @@ export default function Home() {
                                 <div className="mt-4 p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg">
                                     <div className="flex items-start gap-4">
                                         <div className="flex-shrink-0 w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                                            <span className="text-white text-2xl">✓</span>
+                                            <span className="text-white text-2xl"></span>
                                         </div>
                                         <div className="flex-1">
                                             <h3 className="text-lg font-bold text-gray-900 mb-2">
