@@ -142,7 +142,7 @@ export default function Home() {
                     </div>
                 )}
 
-                {result && !result.error && (
+                {result && (
                     <div className="grid gap-6 md:grid-cols-2">
                         {/* Regra 1: Edital Gêmeo */}
                         <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-3">
